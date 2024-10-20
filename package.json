@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "mysql2": "^3.11.3",
+    "nodemon": "^3.1.7",
+    "sequelize": "^6.37.4"
+  },
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
