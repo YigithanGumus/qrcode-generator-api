@@ -1,6 +1,11 @@
-const { Sequelize } = require('sequelize');
+const sequelize = require('./db');
+const express = require('express');
+const app = express();
 
-const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'mysql', /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+const PORT = process.env.PORT || 3000;
+
+sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Sunucu ${PORT} portunda çalışıyor`);
   });
+});
