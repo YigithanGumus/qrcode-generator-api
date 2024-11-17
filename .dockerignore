@@ -1,0 +1,26 @@
+# Git dosyaları
+.git
+.gitignore
+
+# Çevresel değişken dosyaları
+.env
+
+# Node.js projeleri için
+node_modules
+
+# Log dosyaları
+*.log
+logs/
+
+# Derleme veya geçici dosyalar
+*.tmp
+*.swp
+.cache/
+build/
+dist/
+
+# Docker Compose geçici dosyaları
+docker-compose.override.yml
+
+# Hassas bilgiler
+**/secrets/
