@@ -9,6 +9,7 @@ const app = express();
 // JSON isteklerini ayrıştırmak için
 app.use(bodyParser.json());
 
+
 // Rotaları kullan
 app.use('/api', userRoutes);
 
