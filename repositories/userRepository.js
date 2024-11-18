@@ -3,7 +3,7 @@ const User = require("../models/user");
 class UserRepository {
   async createUser(data) {
     return await User.create(data);
-  }
+  } 
 
   async getUserById(id) {
     return await User.findByPk(id);
