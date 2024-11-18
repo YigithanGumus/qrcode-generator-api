@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require("../models/user");
 
 class UserRepository {
   async createUser(data) {
@@ -16,7 +16,7 @@ class UserRepository {
   async updateUser(id, data) {
     const user = await User.findByPk(id);
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
     return await user.update(data);
   }
@@ -24,7 +24,7 @@ class UserRepository {
   async deleteUser(id) {
     const user = await User.findByPk(id);
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
     return await user.destroy();
   }
