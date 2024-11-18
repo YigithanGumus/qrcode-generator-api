@@ -8,7 +8,7 @@ class UserController {
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
-  }
+  } 
 
   async getUserById(req, res) {
     try {
