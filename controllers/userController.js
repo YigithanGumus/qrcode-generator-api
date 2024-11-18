@@ -1,4 +1,4 @@
-const userRepository = require('../repositories/userRepository');
+const userRepository = require("../repositories/userRepository");
 
 class UserController {
   async createUser(req, res) {
@@ -14,7 +14,7 @@ class UserController {
     try {
       const user = await userRepository.getUserById(req.params.id);
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        return res.status(404).json({ message: "User not found" });
       }
       res.json(user);
     } catch (error) {
