@@ -1,20 +1,23 @@
-# Node.js image'ini base image olarak kullan
+# Node.js base image
 FROM node:16
 
-# Çalışma dizinini ayarla
+# Çalışma dizini oluştur
 WORKDIR /usr/src/app
 
 # package.json ve package-lock.json dosyalarını kopyala
 COPY package*.json ./
 
-# Bağımlılıkları yükle
-RUN npm install
+# NPM cache'i temizle ve bağımlılıkları yükle
+RUN npm cache clean --force && npm install
 
-# Uygulamanın tüm dosyalarını kopyala
+# Uygulama dosyalarını kopyala
 COPY . .
 
-# Uygulama için port tanımla
+# Ortam değişkenlerini yükle
+RUN npm install dotenv
+
+# Uygulama için port aç
 EXPOSE 3000
 
 # Uygulamayı başlat
-CMD ["node", "app.js"]
+CMD ["npm", "start"]
