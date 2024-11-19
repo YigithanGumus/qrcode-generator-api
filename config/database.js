@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
     dialect:
       "mysql" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   }
-); 
+);
 
 sequelize
   .authenticate()
