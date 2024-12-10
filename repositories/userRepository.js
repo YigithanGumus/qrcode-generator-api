@@ -35,7 +35,7 @@ class UserRepository {
       throw new Error('User not found');
     }
     return await user.destroy();
-  }
+  } 
 }
 
 module.exports = new UserRepository();
