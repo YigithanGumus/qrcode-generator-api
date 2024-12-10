@@ -1,9 +1,17 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 class UserRepository {
   async createUser(data) {
-    return await User.create(data);
+    const saltRounds = 12; 
+    const hashedPassword = await bcrypt.hash(data.password, saltRounds); 
+  
+    return await User.create({
+      ...data, 
+      password: hashedPassword, 
+    });
   }
+  
 
   async getUserById(id) {
     return await User.findByPk(id);
