@@ -1,0 +1,42 @@
+name: Docker Deploy
+
+on:
+  push:
+    branches:
+      - main  # Main branch'e yapılan commit'lerde çalışır
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Kodları çek
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Docker kurulumu
+    - name: Setup Docker
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker.io
+
+    # Mevcut container'ı sil ve yeni container oluştur
+    - name: Deploy New Container
+      run: |
+        CONTAINER_NAME="c_sequilizeapi"
+        IMAGE_NAME="yigithangumus/sequilizeapi"
+
+        # Eski container'ı durdur ve sil
+        if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
+            echo "Eski container durduruluyor ve siliniyor..."
+            docker stop $CONTAINER_NAME
+            docker rm $CONTAINER_NAME
+        fi
+
+        # Yeni image oluştur
+        echo "Yeni Docker image oluşturuluyor..."
+        docker build -t $IMAGE_NAME .
+
+        # Yeni container başlat
+        echo "Yeni container başlatılıyor..."
+        docker run -d -p 3000:3000 --name $CONTAINER_NAME $IMAGE_NAME

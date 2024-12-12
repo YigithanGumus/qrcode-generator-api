@@ -2,14 +2,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 const sequelize = require('./config/database');
+const cors = require('cors');
 
 const app = express();
 
 // JSON isteklerini ayrıştırmak için
 app.use(bodyParser.json());
+app.use(cors());
 
 // Rotaları kullan
+app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 
 // Veritabanını senkronize et ve sunucuyu başlat
