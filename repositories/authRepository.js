@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const ActiveToken = require('../models/activeToken');
 require("dotenv").config();
 
 class AuthRepository {
@@ -13,24 +14,28 @@ class AuthRepository {
             throw new Error('Email not found');
         }
 
-
         const passwordValid = await bcrypt.compare(password, user.password);
         if (!passwordValid) {
             throw new Error('Incorrect email and password combination');
         }
 
+        // Kullanıcının önceki token'ını iptal et
+        await ActiveToken.destroy({ where: { userId: user.id } });
 
+        // Yeni token'ı oluştur
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
             expiresIn: process.env.JWT_REFRESH_EXPIRATION
         });
-        
+
+        // Yeni token'ı kaydet
+        await ActiveToken.create({ userId: user.id, token });
+
         return {
             id: user.id,
             name: user.name,
             email: user.email,
             accessToken: token,
         };
-    
     }
 }
 
