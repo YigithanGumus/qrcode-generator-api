@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Veritabanı bağlantınızı ayarlayın
-const User = require('./user'); // User modelini içe aktarın
+const sequelize = require('../config/database');
+const User = require('./user'); 
 
 class ActiveToken extends Model {}
 
@@ -18,7 +18,6 @@ ActiveToken.init({
     modelName: 'ActiveToken',
 });
 
-// Kullanıcı ile ilişkiyi tanımlayın
-ActiveToken.belongsTo(User, { foreignKey: 'userId' }); // userId ile User modeline bağlanır
+ActiveToken.belongsTo(User, { foreignKey: 'userId' });
 
 module.exports = ActiveToken; 
