@@ -46,4 +46,4 @@ const QrCode = sequelize.define(
   }
 );
 
-module.exports = QrCode; 
+module.exports = QrCode;
