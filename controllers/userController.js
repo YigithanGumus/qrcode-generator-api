@@ -14,7 +14,7 @@ class UserController {
     try {
       const user = await userRepository.getUserById(req.params.id);
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        return res.status(404).json({ message: "Kullanıcı bulunamadı" });
       }
       res.json(user);
     } catch (error) {

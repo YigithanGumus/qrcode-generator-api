@@ -32,4 +32,4 @@ class QrCodeController {
     }   
 }
 
-module.exports = QrCodeController;
+module.exports = new QrCodeController();

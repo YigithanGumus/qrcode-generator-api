@@ -3,6 +3,10 @@ const QRCode = require('qrcode');
 
 class QrCodeRepository {
   async createQrCode(data) {
+    if (!data.userId) {
+      throw new Error('Kullanıcı ID\'si belirtilmemiş');
+    }
+
     const existingQrCode = await QrCode.findOne({ where: { userId: data.userId } });
     if (existingQrCode) {
       throw new Error('Bu kullanıcı için zaten bir QR kodu oluşturulmuş');

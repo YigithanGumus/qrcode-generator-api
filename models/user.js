@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
 const User = sequelize.define(
-  "User",
+  "users", 
   {
     name: {
       type: DataTypes.STRING,
@@ -17,15 +17,15 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    isActive: {
+    status: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true,
     },
-    isDeleted: {
+    isActive: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
+      defaultValue: true,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -40,9 +40,9 @@ const User = sequelize.define(
       allowNull: true,
     },
     role: {
-      type: DataTypes.ENUM("admin", "user"),
+      type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: "user",
+      defaultValue: 2,
     },
   },
   {

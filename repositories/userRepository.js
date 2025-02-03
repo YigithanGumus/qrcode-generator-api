@@ -11,7 +11,6 @@ class UserRepository {
       password: hashedPassword, 
     });
   }
-  
 
   async getUserById(id) {
     return await User.findByPk(id);
