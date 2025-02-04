@@ -7,18 +7,40 @@ class QrCodeRepository {
       throw new Error('Kullanıcı ID\'si belirtilmemiş');
     }
 
-    const existingQrCode = await QrCode.findOne({ where: { userId: data.userId } });
-    if (existingQrCode) {
-      throw new Error('Bu kullanıcı için zaten bir QR kodu oluşturulmuş');
+    const options = {
+      color: {
+        dark: data.qrColor || '#000000',
+        light: data.qrBackgroundColor || '#ffffff'
+      },
+      width: 200,
+      height: 200,
+      errorCorrectionLevel: 'H',
+      margin: 1
+    };
+
+    if (data.logo) {
+      options.logoPath = data.logo;
+      options.logoWidth = 50;
+      options.logoHeight = 50;
     }
 
-    const qrCodeDataURL = await QRCode.toDataURL(data.qrCode);
-    const qrCodeImage = await QRCode.toFile(`qrimage/${data.userId}.png`, data.qrCode);
+    const qrCodeDataURL = await QRCode.toDataURL(data.qrCode, options);
 
+    // Rastgele bir isim oluştur
+    const randomString = Math.random().toString(36).substring(2, 15);
+    const timestamp = Date.now();
+    const fileName = `qr_${randomString}_${timestamp}.png`;
+
+    const qrCodeImage = await QRCode.toFile(
+      `qrimage/${fileName}`,
+      data.qrCode,
+      options
+    );
+ 
     return await QrCode.create({
       ...data,
       qrCodeDataURL,
-      qrCodeImage: `qrimage/${data.userId}.png`,
+      qrCodeImage: `qrimage/${fileName}`,
       userId: data.userId,
       createdAt: new Date(),
     });
