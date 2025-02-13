@@ -29,7 +29,7 @@ class QrCodeController {
     async getQrCodeById(req, res) {
         const qrCode = await qrCodeRepository.getQrCodeById(req.params.id);
         res.status(200).json(qrCode);
-    }   
+    }
 }
 
 module.exports = new QrCodeController();

@@ -3,6 +3,7 @@ const QRCode = require('qrcode');
 
 class QrCodeRepository {
   async createQrCode(data) {
+    
     if (!data.userId) {
       throw new Error('Kullanıcı ID\'si belirtilmemiş');
     }
@@ -12,16 +13,33 @@ class QrCodeRepository {
         dark: data.qrColor || '#000000',
         light: data.qrBackgroundColor || '#ffffff'
       },
-      width: 200,
-      height: 200,
+      width: 300, // Logo için daha büyük QR kod
+      height: 300,
       errorCorrectionLevel: 'H',
-      margin: 1
+      margin: 2,
+      version: 5 // Daha büyük QR kod versiyonu
     };
 
     if (data.logo) {
-      options.logoPath = data.logo;
-      options.logoWidth = 50;
-      options.logoHeight = 50;
+      // Logo ayarlarını güncelle
+      const jimp = require('jimp');
+      const QRImage = await jimp.read(Buffer.from(data.qrCode));
+      const logo = await jimp.read(data.logo);
+      
+      // Logo boyutunu ayarla (QR kodun %30'u kadar)
+      const logoSize = QRImage.bitmap.width * 0.3;
+      logo.resize(logoSize, logoSize);
+      
+      // Logo pozisyonunu merkeze ayarla
+      const logoX = (QRImage.bitmap.width - logo.bitmap.width) / 2;
+      const logoY = (QRImage.bitmap.height - logo.bitmap.height) / 2;
+
+      // Logoyu QR kodun tam ortasına yerleştir
+      QRImage.composite(logo, logoX, logoY, {
+        mode: jimp.BLEND_SOURCE_OVER,
+        opacitySource: 1,
+        opacityDest: 1
+      });
     }
 
     const qrCodeDataURL = await QRCode.toDataURL(data.qrCode, options);

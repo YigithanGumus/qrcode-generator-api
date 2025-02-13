@@ -15,5 +15,4 @@ router.post('/users/qrcode', authMiddleware, qrcodeController.createQrCode);
 router.put('/users/qrcode/:id', authMiddleware, qrcodeController.updateQrCode);
 router.delete('/users/qrcode/:id', authMiddleware, qrcodeController.deleteQrCode);
 
-
 module.exports = router;
