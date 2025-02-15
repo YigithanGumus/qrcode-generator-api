@@ -21,9 +21,8 @@ app.use(fileUpload());
 app.use(express.urlencoded({ extended: true }));000
 // form-data desteği ekle
 
-app.use(cors());
 */
-
+app.use(cors());
 // Rotaları kullan
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
