@@ -6,6 +6,8 @@ const sequelize = require('./config/database');
 const cors = require('cors');
 const formidable = require('express-formidable');
 const fileUpload = require('express-fileupload');
+const publicRoutes = require('./routes/publicRoutes');
+var path = require('path');
 
 const app = express();
 
@@ -26,6 +28,14 @@ app.use(cors());
 // Rotaları kullan
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
+
+app.use('/', publicRoutes);
+
+// Statik dosyaları sunmak için
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
+app.use(express.static(path.join(__dirname, 'views', 'public')));
 
 // Veritabanını senkronize et ve sunucuyu başlat
 sequelize.sync().then(() => {
