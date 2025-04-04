@@ -23,7 +23,7 @@ This project is a REST API developed for QR code generation and management. It i
 
 1. Projeyi klonlayın / Clone the project:
 ```bash
-git clone https://github.com/kullaniciadi/qrcode-generator-api.git
+git clone https://github.com/YigithanGumus/qrcode-generator-api.git
 cd qrcode-generator-api
 ```
 
