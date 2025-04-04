@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "yigitha4_yigithan",
-    "password": "2kp4kxE3iufw3HF",
-    "database": "yigitha4_sequelize",
-    "host": "104.247.165.67",
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {

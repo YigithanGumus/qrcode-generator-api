@@ -1,11 +1,11 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
-  "yigitha4_sequelize",
-  "yigitha4_yigithan",
-  "2kp4kxE3iufw3HF",
+  "",
+  "",
+  "",  
   {
-    host: "104.247.165.67",
+    host: "",
     dialect:
       "mysql" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   }

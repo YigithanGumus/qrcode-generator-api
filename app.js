@@ -31,12 +31,6 @@ app.use('/api', userRoutes);
 
 app.use('/', publicRoutes);
 
-// Statik dosyaları sunmak için
-app.set('view engine', 'ejs');
-app.set('views', './views');
-
-app.use(express.static(path.join(__dirname, 'views', 'public')));
-
 // Veritabanını senkronize et ve sunucuyu başlat
 sequelize.sync().then(() => {
   app.listen(3000, () => {
