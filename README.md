@@ -32,13 +32,20 @@ cd qrcode-generator-api
 npm install
 ```
 
-3. `.env` dosyasını oluşturun ve gerekli değişkenleri ayarlayın / Create `.env` file and set required variables:
+3. `.env` dosyasını oluşturun / Create `.env` file:
 ```env
+# Veritabanı Ayarları / Database Settings
 DB_HOST=localhost
-DB_USER=your_username
-DB_PASS=your_password
-DB_NAME=your_database
-JWT_SECRET=your_jwt_secret
+DB_PORT=3306
+DB_NAME=your_database_name
+
+# JWT Ayarları / JWT Settings
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=24h
+
+# Uygulama Ayarları / Application Settings
+PORT=3000
+NODE_ENV=development
 ```
 
 4. Veritabanı migrasyonlarını çalıştırın / Run database migrations:
